@@ -8,8 +8,8 @@ window.onload = async function() {
   let requestedView = window.location.hash;
 
   auth0Client = await createAuth0Client({
-    domain: '{YOUR-AUTH0-DOMAIN}',
-    client_id: '{YOUR-AUTH0-CLIENT-ID}'
+    domain: 'joshc-test.auth0.com',
+    client_id: 'R9fIeyk7DhbXZ7pORbGP0VwLU1Z0KU5g'
   });
 
   if (requestedView === '#callback') {
