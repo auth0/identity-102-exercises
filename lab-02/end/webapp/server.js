@@ -5,7 +5,6 @@ const morgan = require('morgan');
 const session = require('cookie-session');
 const request = require('request-promise');
 const {auth, requiresAuth} = require('express-openid-connect');
-const { Issuer } = require('openid-client');
 
 const appUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT}`;
 
@@ -43,13 +42,8 @@ app.get('/user', requiresAuth(), (req, res) => {
 app.get('/expenses', requiresAuth(), async (req, res, next) => {
   try {
     let tokenSet = req.openid.tokens;
-    if(tokenSet.expired()) {
-      const issuer = await Issuer.discover(process.env.ISSUER_BASE_URL);
-      const client = new issuer.Client({
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET
-      });
-      tokenSet = await client.refresh(tokenSet);
+    if (tokenSet.expired()) {
+      tokenSet = await req.openid.client.refresh(tokenSet);
       tokenSet.refresh_token = req.openid.tokens.refresh_token;
       req.openid.tokens = tokenSet;
     }
