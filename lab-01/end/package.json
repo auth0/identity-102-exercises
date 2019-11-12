@@ -14,7 +14,7 @@
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "express-openid-connect": "^0.4.0",
+    "express-openid-connect": "^0.5.0",
     "morgan": "^1.9.1"
   }
 }
