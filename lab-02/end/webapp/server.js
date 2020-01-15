@@ -23,6 +23,7 @@ app.use(auth({
   required: false,
   auth0Logout: true,
   baseURL: appUrl,
+  appSessionSecret: false,
   authorizationParams: {
     response_type: 'code id_token',
     response_mode: 'form_post',
@@ -31,7 +32,11 @@ app.use(auth({
   },
   handleCallback: async function (req, res, next) {
     req.session.openidTokens = req.openidTokens;
+    req.session.userIdentity = req.openidTokens.claims();
     next();
+  },
+  getUser: async function (req) {
+    return req.session.userIdentity;
   }
 }));
 
