@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
-const session = require('cookie-session');
 const request = require('request-promise');
+const session = require('express-session');
 const {auth, requiresAuth} = require('express-openid-connect');
 
 const appUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT}`;
@@ -13,22 +13,26 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(morgan('combined'));
-
 app.use(session({
-  name: 'identity102-lab-02',
-  secret: process.env.COOKIE_SECRET,
+  secret: process.env.APP_SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
 }));
-
-app.use(express.urlencoded({ extended: false }));
 
 app.use(auth({
   required: false,
   auth0Logout: true,
+  baseURL: appUrl,
   authorizationParams: {
     response_type: 'code id_token',
+    response_mode: 'form_post',
     audience: process.env.API_AUDIENCE,
     scope: 'openid profile email read:reports offline_access'
   },
+  handleCallback: async function (req, res, next) {
+    req.session.openidTokens = req.openidTokens;
+    next();
+  }
 }));
 
 app.get('/', (req, res) => {
@@ -41,17 +45,16 @@ app.get('/user', requiresAuth(), (req, res) => {
 
 app.get('/expenses', requiresAuth(), async (req, res, next) => {
   try {
-    let tokenSet = req.openid.tokens;
+    let tokenSet = req.openid.makeTokenSet(req.session.openidTokens);
+
     if (tokenSet.expired()) {
       tokenSet = await req.openid.client.refresh(tokenSet);
-      tokenSet.refresh_token = req.openid.tokens.refresh_token;
-      req.openid.tokens = tokenSet;
+      tokenSet.refresh_token = req.session.openidTokens.refresh_token;
+      req.session.openidTokens = tokenSet;
     }
 
     const expenses = await request(process.env.API_URL, {
-      headers: {
-        authorization: `Bearer ${tokenSet.access_token}`
-      },
+      headers: { authorization: "Bearer " + tokenSet.access_token },
       json: true
     });
 
