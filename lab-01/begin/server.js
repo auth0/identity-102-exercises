@@ -6,12 +6,8 @@ const morgan = require('morgan');
 const appUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT}`;
 
 const app = express();
-
 app.set('view engine', 'ejs');
-
 app.use(morgan('combined'));
-
-app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   res.render('home',  { user: req.openid && req.openid.user });
