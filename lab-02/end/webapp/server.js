@@ -1,54 +1,61 @@
-require('dotenv').config();
-const express = require('express');
-const http = require('http');
-const morgan = require('morgan');
-const request = require('request-promise');
-const session = require('express-session');
-const {auth, requiresAuth} = require('express-openid-connect');
+require("dotenv").config();
+const express = require("express");
+const http = require("http");
+const morgan = require("morgan");
+const request = require("request-promise");
+const session = require("express-session");
+const { auth, requiresAuth } = require("express-openid-connect");
 
 const appUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT}`;
 
 const app = express();
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-app.use(morgan('combined'));
-app.use(session({
-  secret: process.env.APP_SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-}));
+app.use(morgan("combined"));
 
-app.use(auth({
-  required: false,
-  auth0Logout: true,
-  baseURL: appUrl,
-  appSessionSecret: false,
-  authorizationParams: {
-    response_type: 'code id_token',
-    response_mode: 'form_post',
-    audience: process.env.API_AUDIENCE,
-    scope: 'openid profile email read:reports offline_access'
-  },
-  handleCallback: async function (req, res, next) {
-    req.session.openidTokens = req.openidTokens;
-    req.session.userIdentity = req.openidTokens.claims();
-    next();
-  },
-  getUser: async function (req) {
-    return req.session.userIdentity;
-  }
-}));
+app.use(
+  session({
+    secret: process.env.APP_SESSION_SECRET,
+    cookie: {
+      // Sets the session cookie to expire after 7 days.
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    },
+  })
+);
 
-app.get('/', (req, res) => {
-  res.render('home', { user: req.openid && req.openid.user });
+app.use(
+  auth({
+    required: false,
+    auth0Logout: true,
+    baseURL: appUrl,
+    appSession: false,
+    authorizationParams: {
+      response_type: "code id_token",
+      response_mode: "form_post",
+      audience: process.env.API_AUDIENCE,
+      scope: "openid profile email read:reports offline_access",
+    },
+    handleCallback: async function (req, res, next) {
+      // This will store the user identity claims in the session.
+      req.session.userIdentity = req.openidTokens.claims();
+      next();
+    },
+    getUser: async function (req) {
+      return req.session.userIdentity;
+    },
+  })
+);
+
+app.get("/", (req, res) => {
+  res.render("home", { user: req.openid && req.openid.user });
 });
 
-app.get('/user', requiresAuth(), (req, res) => {
-  res.render('user', { user: req.openid && req.openid.user });
+app.get("/user", requiresAuth(), (req, res) => {
+  res.render("user", { user: req.openid && req.openid.user });
 });
 
-app.get('/expenses', requiresAuth(), async (req, res, next) => {
+app.get("/expenses", requiresAuth(), async (req, res, next) => {
   try {
     let tokenSet = req.openid.makeTokenSet(req.session.openidTokens);
 
@@ -60,22 +67,22 @@ app.get('/expenses', requiresAuth(), async (req, res, next) => {
 
     const expenses = await request(process.env.API_URL, {
       headers: { authorization: "Bearer " + tokenSet.access_token },
-      json: true
+      json: true,
     });
 
-    res.render('expenses', {
+    res.render("expenses", {
       user: req.openid && req.openid.user,
       expenses,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
-app.get('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
-});
+// app.get("/logout", (req, res) => {
+//   req.session = null;
+//   res.redirect("/");
+// });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
