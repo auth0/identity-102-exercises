@@ -13,6 +13,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(morgan("combined"));
+
 app.use(
   session({
     secret: process.env.APP_SESSION_SECRET,
@@ -23,9 +24,10 @@ app.use(
 
 app.use(
   auth({
+    baseURL: appUrl,
     required: false,
     auth0Logout: true,
-    baseURL: appUrl,
+    routes: false,
     appSession: false,
     authorizationParams: {
       response_type: "code id_token",
@@ -43,6 +45,13 @@ app.use(
     },
   })
 );
+
+app.get("/login", (req, res) => res.openid.login({ returnTo: "/" }));
+
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.openid.logout();
+});
 
 app.get("/", (req, res) => {
   res.render("home", { user: req.openid && req.openid.user });
