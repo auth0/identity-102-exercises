@@ -1,8 +1,12 @@
 {
   "name": "begin",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Auth0 Labs Sample Web Application",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auth0/identity-102-exercises.git"
+  },
   "scripts": {
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
