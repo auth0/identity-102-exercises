@@ -40,8 +40,9 @@ public enum WebAuthError: CustomNSError {
     case pkceNotAllowed(String)
     case noNonceProvided
     case missingResponseParam(String)
-    case invalidIdTokenNonce
+    case invalidIdTokenNonce // TODO: Remove on the next major
     case missingAccessToken
+    case unknownError
 
     static let genericFoundationCode = 1
     static let cancelledFoundationCode = 0

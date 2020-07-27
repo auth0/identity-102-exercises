@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-exercise-01/Pods-exercise-01-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework
+${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework
+${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework
