@@ -1,8 +1,12 @@
 {
   "name": "begin",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Auth0 Labs Sample Web Application",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auth0/identity-102-exercises.git"
+  },
   "scripts": {
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +16,7 @@
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "express-openid-connect": "^0.6.0",
+    "express-openid-connect": "^1.0.2",
     "morgan": "^1.9.1"
   }
 }
