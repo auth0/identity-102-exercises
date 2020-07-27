@@ -1,8 +1,12 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Auth0 Labs Sample API",
+  "main": "api-server.js",
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/auth0/identity-102-exercises.git"
+  },
   "scripts": {
     "start": "node api-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +14,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   }
 }
