@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
-cconst { auth } = require('express-openid-connect');
+const { auth } = require('express-openid-connect');
 
 const appUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT}`;
 
