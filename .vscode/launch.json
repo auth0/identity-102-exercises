@@ -1,0 +1,239 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 01 Web App Begin",
+      "cwd": "${workspaceFolder}/lab-01/begin/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 01 Web App End",
+      "cwd": "${workspaceFolder}/lab-01/end/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 02 API Begin",
+      "cwd": "${workspaceFolder}/lab-02/begin/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 02 Web App Begin",
+      "cwd": "${workspaceFolder}/lab-02/begin/webapp/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 02 API End",
+      "cwd": "${workspaceFolder}/lab-02/end/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 02 Web App End",
+      "cwd": "${workspaceFolder}/lab-02/end/webapp/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 01 API Begin",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/begin/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 01 SPA Begin",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/begin/spa/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "5000", "-c-1"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 01 API End",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/end/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 01 SPA End",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/end/spa/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "5000", "-c-1"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 02 API Begin",
+      "cwd": "${workspaceFolder}/lab-04/exercise-02/begin/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 02 SPA Begin",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/begin/spa/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "5000", "-c-1"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 02 API End",
+      "cwd": "${workspaceFolder}/lab-04/exercise-02/end/api/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+    },
+    {
+      "presentation": {
+        "hidden": true,
+      },
+      "type": "node",
+      "request": "launch",
+      "name": "Lab 04 Ex 02 SPA End",
+      "cwd": "${workspaceFolder}/lab-04/exercise-01/end/spa/",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "5000", "-c-1"],
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Lab 02 Begin",
+      "configurations": [
+        "Lab 02 API Begin",
+        "Lab 02 Web App Begin"
+      ]
+    },
+    {
+      "name": "Lab 02 End",
+      "configurations": [
+        "Lab 02 API End",
+        "Lab 02 Web App End"
+      ]
+    },
+    {
+      "name": "Lab 04 Ex 01 Begin",
+      "configurations": [
+        "Lab 04 Ex 01 API Begin",
+        "Lab 04 Ex 01 SPA Begin"
+      ]
+    },
+    {
+      "name": "Lab 04 Ex 01 End",
+      "configurations": [
+        "Lab 04 Ex 01 API End",
+        "Lab 04 Ex 01 SPA End"
+      ]
+    },
+    {
+      "name": "Lab 04 Ex 02 Begin",
+      "configurations": [
+        "Lab 04 Ex 02 API Begin",
+        "Lab 04 Ex 02 SPA Begin"
+      ]
+    },
+    {
+      "name": "Lab 04 Ex 02 End",
+      "configurations": [
+        "Lab 04 Ex 02 API End",
+        "Lab 04 Ex 02 SPA End"
+      ]
+    },
+  ]
+}

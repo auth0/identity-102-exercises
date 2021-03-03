@@ -13,9 +13,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "ejs": "^2.7.1",
-    "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "dotenv": "8.2.0",
+    "ejs": "3.1.6",
+    "express": "4.17.1",
+    "morgan": "1.10.0"
   }
 }

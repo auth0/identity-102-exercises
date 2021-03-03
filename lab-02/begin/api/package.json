@@ -4,8 +4,8 @@
   "description": "Auth0 Labs Sample API",
   "main": "api-server.js",
   "repository": {
-    "type":"git",
-    "url":"https://github.com/auth0/identity-102-exercises.git"
+    "type": "git",
+    "url": "https://github.com/auth0/identity-102-exercises.git"
   },
   "scripts": {
     "start": "node api-server",
@@ -14,7 +14,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "dotenv": "8.2.0",
+    "express": "4.17.1"
   }
 }
